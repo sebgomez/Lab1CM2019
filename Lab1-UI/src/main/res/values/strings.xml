@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LabsCM20191</string>
+    <string name="category_dishes">Platos</string>
+    <string name="category_drinks">Bebidas</string>
+    <string name="placeholder" translatable="false">placeholder</string>
+    <string name="add_dish">Agregar plato</string>
+    <string name="dish_name">Nombre del plato</string>
+    <string name="morning">Mañana</string>
+    <string name="afternoon">Tarder</string>
+    <string name="night">Noche</string>
+    <string name="entree">Entrada</string>
+    <string name="second">Plato fuerte</string>
+    <string name="prep_time">Tiempo de preparación</string>
+    <string name="price">Precio</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="time">Horario</string>
+    <string name="dish_type">Tipo de plato</string>
+</resources>

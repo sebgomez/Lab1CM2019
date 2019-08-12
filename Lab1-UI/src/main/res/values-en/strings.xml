@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LabsCM20191</string>
+    <string name="category_dishes">Dishes</string>
+    <string name="category_drinks">Drinks</string>
+    <string name="add_dish">Add dish</string>
+    <string name="dish_name">Dish name</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="morning">morning</string>
+    <string name="night">night</string>
+    <string name="entree">Entree</string>
+    <string name="second">Second</string>
+    <string name="dish_type">Dish type</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="prep_time">Preparation time</string>
+    <string name="price">Price</string>
+    <string name="time">Time</string>
+</resources>
