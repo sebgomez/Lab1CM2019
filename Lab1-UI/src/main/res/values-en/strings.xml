@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">LabsCM20191</string>
     <string name="category_dishes">Dishes</string>
     <string name="category_drinks">Drinks</string>
@@ -12,7 +12,12 @@
     <string name="second">Second</string>
     <string name="dish_type">Dish type</string>
     <string name="ingredients">Ingredients</string>
-    <string name="prep_time">Preparation time</string>
+    <string name="prepTime">Preparation time</string>
     <string name="price">Price</string>
     <string name="time">Time</string>
+    <string name="type_message">Type  <xliff:g example="Entrada" id="type">%s</xliff:g></string>
+    <string name="time_message">"Time          <xliff:g id="morning">%s</xliff:g>          <xliff:g id="afternoon">%s</xliff:g>          <xliff:g id="night">%s</xliff:g>     "</string>
+    <string name="price_message">Price $<xliff:g example="50000" id="price">%d</xliff:g></string>
+    <string name="prep_time_message">Preparation time   <xliff:g example="5" id="prepTime">%d</xliff:g> minutos</string>
+    <string name="ingredients_message">Ingredients <xliff:g example="paprika" id="ingredients">%s</xliff:g></string>
 </resources>

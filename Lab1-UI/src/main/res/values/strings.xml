@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">LabsCM20191</string>
     <string name="category_dishes">Platos</string>
     <string name="category_drinks">Bebidas</string>
@@ -6,13 +7,23 @@
     <string name="add_dish">Agregar plato</string>
     <string name="dish_name">Nombre del plato</string>
     <string name="morning">Mañana</string>
-    <string name="afternoon">Tarder</string>
+    <string name="afternoon">Tarde</string>
     <string name="night">Noche</string>
     <string name="entree">Entrada</string>
     <string name="second">Plato fuerte</string>
-    <string name="prep_time">Tiempo de preparación</string>
+    <string name="prepTime">Tiempo de preparación</string>
     <string name="price">Precio</string>
     <string name="ingredients">Ingredientes</string>
     <string name="time">Horario</string>
     <string name="dish_type">Tipo de plato</string>
+    <string name="type_message">Tipo   \n<xliff:g example="Entrada" id="type">%s</xliff:g></string>
+    <string name="prep_time_message">Tiempo de preparación   <xliff:g example="5" id="prepTime">%d</xliff:g> minutos</string>
+    <string name="price_message">Precio  $<xliff:g example="50000" id="price">%d</xliff:g></string>
+    <string name="ingredients_message">Ingredients <xliff:g example="paprika" id="ingredients">%s</xliff:g></string>
+    <string name="time_message">"Horario
+        \n<xliff:g id="morning">%s</xliff:g>
+        \n<xliff:g id="afternoon">%s</xliff:g>
+        \n<xliff:g id="night">%s</xliff:g>"</string>
+
+
 </resources>

@@ -21,16 +21,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class DishesActivity extends AppCompatActivity {
+
+    ArrayList<Dish> dishes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,44 +50,50 @@ public class DishesActivity extends AppCompatActivity {
         addDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout rootView = findViewById(R.id.rootViewDishes);
-                LinearLayout childView = findViewById(R.id.childViewDishes);
-                TextView newTextView = new TextView(DishesActivity.this);
-                String temp = getString(R.string.time);
 
-                EditText dishName = findViewById(R.id.dish_name_edit_text);
-                newTextView.setText(dishName.getText());
-                childView.addView(newTextView);
+                EditText nameEdit = findViewById(R.id.dish_name_edit_text);
+                String name = nameEdit.getText().toString();
 
+                ArrayList<String> times = new ArrayList<>();
                 CheckBox checkBox1 = findViewById(R.id.morning_checkbox);
                 CheckBox checkBox2 = findViewById(R.id.afternoon_checkbox);
                 CheckBox checkBox3 = findViewById(R.id.night_checkbox);
                 if (checkBox1.isChecked()) {
-                    temp = temp + ":" + getString(R.string.morning);
+                    times.add(getString(R.string.morning));
                 }
                 if (checkBox2.isChecked()) {
-                    temp = temp + ":" + getString(R.string.afternoon);
+                    times.add(getString(R.string.afternoon));
                 }
-                if (checkBox1.isChecked()) {
-                    temp = temp + ":" + getString(R.string.night);
+                if (checkBox3.isChecked()) {
+                    times.add(getString(R.string.night));
                 }
-                newTextView.setText(temp);
-                childView.addView(newTextView);
+
 
                 RadioGroup radioGroup = findViewById(R.id.type_group);
-                RadioButton selectedRadioButton  = findViewById(radioGroup.getCheckedRadioButtonId());
-                newTextView.setText(getString(R.string.dish_type)+": "+selectedRadioButton.getText());
+                RadioButton selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+                String type = selectedRadioButton.getText().toString();
 
-                rootView.addView(childView);
+                EditText priceEdit = findViewById(R.id.price_edit_text);
+                int price = Integer.parseInt(priceEdit.getText().toString());
 
+                EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
+                String ingredients = ingredientsEdit.getText().toString();
+
+                NumberPicker prepTimePicker= findViewById(R.id.prep_time_picker);
+                int prep_time = prepTimePicker.getValue();
+
+                Dish newDish = new Dish(name,times,type,prep_time,price,ingredients);
+                dishes.add(newDish);
+
+                DishAdapter adapter = new DishAdapter(DishesActivity.this, dishes);
+                ListView listView = findViewById(R.id.rootViewDishes);
+                listView.setAdapter(adapter);
             }
         });
 
-        ArrayList<Dish> dishes = new ArrayList<>();
-        dishes.add(new
-
-                Dish("one", "lutti"));
-        /*words.add("two");
+        /*ArrayList<Word> dishes = new ArrayList<>();
+        //dishes.add(new Word("one","lutti"));
+        *//*words.add("two");
         words.add("three");
         words.add("four");
         words.add("five");
@@ -91,16 +101,18 @@ public class DishesActivity extends AppCompatActivity {
         words.add("seven");
         words.add("eight");
         words.add("nine");
-        words.add("ten");*/
+        words.add("ten");*//*
 
-        //DishAdapter adapter = new DishAdapter(this, dishes);
-        LinearLayout rootView = findViewById(R.id.rootViewDishes);
+        *//*LinearLayout rootView = findViewById(R.id.rootViewDishes);
         for (
                 int i = 0; i < dishes.size(); i++) {
             TextView dishView = new TextView(this);
             dishView.setText(dishes.get(i).getDefaulTranslation());
             rootView.addView(dishView);
-        }
+        }*//*
 
+        DishAdapter adapter = new Dishdapter(this, dishes);
+        ListView listView = (ListView) findViewById(R.id.rootViewNumbers);
+        listView.setAdapter(adapter);*/
     }
 }
