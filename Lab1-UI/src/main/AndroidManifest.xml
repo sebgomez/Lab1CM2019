@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="co.edu.udea.compumovil.gr04_20191.lab1">
+    <uses-permission android:name="andrid.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"

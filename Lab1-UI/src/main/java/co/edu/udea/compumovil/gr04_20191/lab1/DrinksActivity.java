@@ -55,26 +55,26 @@ public class DrinksActivity extends AppCompatActivity {
 
                 Drink newDrink = createDrink();
                 drinks.add(newDrink);
-                showDrinks(newDrink);
                 saveDrinks();
                 cleanFields();
+                showDrinks(newDrink);
             }
         });
     }
 
     private void saveDrinks() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences drinks", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(drinks);
-        editor.putString("list", json);
+        editor.putString("listdrinks", json);
         editor.apply();
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences drinks", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("list", null);
+        String json = sharedPreferences.getString("listdrinks", null);
         Type type = new TypeToken<ArrayList<Drink>>() {
         }.getType();
         drinks = gson.fromJson(json, type);
