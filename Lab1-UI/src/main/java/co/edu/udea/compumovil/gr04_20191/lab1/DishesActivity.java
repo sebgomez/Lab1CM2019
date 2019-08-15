@@ -15,6 +15,7 @@
  */
 package co.edu.udea.compumovil.gr04_20191.lab1;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,10 @@ import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DishesActivity extends AppCompatActivity {
@@ -43,16 +48,45 @@ public class DishesActivity extends AppCompatActivity {
         np.setMaxValue(60);
         np.setWrapSelectorWheel(true);
 
+        loadData();
+        /*for(int cont = 0; cont<=dishes.size(); cont++){
+            showDishes(dishes.get(cont));
+        }*/
+        showDishes(dishes.get(0));
+        //showDishes(dishes.get(1));
+
         Button addDish = findViewById(R.id.add_dish);
         addDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dish newDish= createDish();
+                Dish newDish = createDish();
                 dishes.add(newDish);
                 showDishes(newDish);
+                saveDishes();
+
             }
         });
+    }
+
+    private void saveDishes(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json =  gson.toJson(dishes);
+        editor.putString("list", json);
+        editor.apply();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("list", null);
+        Type type = new TypeToken<ArrayList<Dish>>() {}.getType();
+        dishes = gson.fromJson(json,type);
+        if(dishes == null){
+            dishes = new ArrayList<>();
+        }
     }
 
     private Dish createDish() {
