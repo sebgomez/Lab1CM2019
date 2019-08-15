@@ -17,7 +17,7 @@ public class DishAdapter extends ArrayAdapter<Dish> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
-        if(listItemView == null) {
+        if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
@@ -27,25 +27,30 @@ public class DishAdapter extends ArrayAdapter<Dish> {
         nameTextView.setText(currentDish.getName());
 
         TextView typeTextView = listItemView.findViewById(R.id.type_text_view);
-        typeTextView.setText(getContext().getString(R.string.type_message,currentDish.getType()));
+        typeTextView.setText(getContext().getString(R.string.type_message, currentDish.getType()));
 
         TextView timeTextView = listItemView.findViewById(R.id.time_text_view);
         ArrayList<String> servTime = currentDish.getTime();
 
+        for (int i = servTime.size(); i < 3; i++) {
+            servTime.add("");
+        }
         timeTextView.setText(getContext().getString(R.string.time_message,
                 servTime.get(0),
                 servTime.get(1),
                 servTime.get(2)));
 
         TextView prepTimeTextView = listItemView.findViewById(R.id.prep_time_text_view);
-        prepTimeTextView.setText(getContext().getString(R.string.prep_time_message,currentDish.getPrepTime()));
+        prepTimeTextView.setText(getContext().getString(R.string.prep_time_message, currentDish.getPrepTime()));
 
         TextView priceTextView = listItemView.findViewById(R.id.price_text_view);
-        priceTextView.setText(getContext().getString(R.string.price_message,currentDish.getPrice()));
+        priceTextView.setText(getContext().getString(R.string.price_message, currentDish.getPrice()));
 
         TextView ingredientsTextView = listItemView.findViewById(R.id.ingredients_text_view);
-        ingredientsTextView.setText(getContext().getString(R.string.ingredients_message,currentDish.getIngredients()));
+        ingredientsTextView.setText(getContext().getString(R.string.ingredients_message, currentDish.getIngredients()));
 
         return listItemView;
     }
+
+
 }

@@ -20,13 +20,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,68 +48,56 @@ public class DishesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                EditText nameEdit = findViewById(R.id.dish_name_edit_text);
-                String name = nameEdit.getText().toString();
-
-                ArrayList<String> times = new ArrayList<>();
-                CheckBox checkBox1 = findViewById(R.id.morning_checkbox);
-                CheckBox checkBox2 = findViewById(R.id.afternoon_checkbox);
-                CheckBox checkBox3 = findViewById(R.id.night_checkbox);
-                if (checkBox1.isChecked()) {
-                    times.add(getString(R.string.morning));
-                }
-                if (checkBox2.isChecked()) {
-                    times.add(getString(R.string.afternoon));
-                }
-                if (checkBox3.isChecked()) {
-                    times.add(getString(R.string.night));
-                }
-
-
-                RadioGroup radioGroup = findViewById(R.id.type_group);
-                RadioButton selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
-                String type = selectedRadioButton.getText().toString();
-
-                EditText priceEdit = findViewById(R.id.price_edit_text);
-                int price = Integer.parseInt(priceEdit.getText().toString());
-
-                EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
-                String ingredients = ingredientsEdit.getText().toString();
-
-                NumberPicker prepTimePicker= findViewById(R.id.prep_time_picker);
-                int prep_time = prepTimePicker.getValue();
-
-                Dish newDish = new Dish(name,times,type,prep_time,price,ingredients);
+                Dish newDish= createDish();
                 dishes.add(newDish);
-
-                DishAdapter adapter = new DishAdapter(DishesActivity.this, dishes);
-                ListView listView = findViewById(R.id.rootViewDishes);
-                listView.setAdapter(adapter);
+                showDishes(newDish);
             }
         });
+    }
 
-        /*ArrayList<Word> dishes = new ArrayList<>();
-        //dishes.add(new Word("one","lutti"));
-        *//*words.add("two");
-        words.add("three");
-        words.add("four");
-        words.add("five");
-        words.add("six");
-        words.add("seven");
-        words.add("eight");
-        words.add("nine");
-        words.add("ten");*//*
+    private Dish createDish() {
+        EditText nameEdit = findViewById(R.id.dish_name_edit_text);
+        String name = nameEdit.getText().toString();
 
-        *//*LinearLayout rootView = findViewById(R.id.rootViewDishes);
-        for (
-                int i = 0; i < dishes.size(); i++) {
-            TextView dishView = new TextView(this);
-            dishView.setText(dishes.get(i).getDefaulTranslation());
-            rootView.addView(dishView);
-        }*//*
+        ArrayList<String> times = new ArrayList<>();
+        CheckBox checkBox1 = findViewById(R.id.morning_checkbox);
+        CheckBox checkBox2 = findViewById(R.id.afternoon_checkbox);
+        CheckBox checkBox3 = findViewById(R.id.night_checkbox);
+        if (checkBox1.isChecked()) {
+            times.add(getString(R.string.morning));
+        }
+        if (checkBox2.isChecked()) {
+            times.add(getString(R.string.afternoon));
+        }
+        if (checkBox3.isChecked()) {
+            times.add(getString(R.string.night));
+        }
 
-        DishAdapter adapter = new Dishdapter(this, dishes);
-        ListView listView = (ListView) findViewById(R.id.rootViewNumbers);
-        listView.setAdapter(adapter);*/
+        RadioGroup radioGroup = findViewById(R.id.type_group);
+        RadioButton selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+        String type = selectedRadioButton.getText().toString();
+
+        EditText priceEdit = findViewById(R.id.price_edit_text);
+        int price = Integer.parseInt(priceEdit.getText().toString());
+
+        EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
+        String ingredients = ingredientsEdit.getText().toString();
+
+        NumberPicker prepTimePicker = findViewById(R.id.prep_time_picker);
+        int prep_time = prepTimePicker.getValue();
+
+        return (new Dish(name, times, type, prep_time, price, ingredients));
+    }
+
+    private void showDishes(Dish dish){
+        DishAdapter adapter;
+        ListView listView = findViewById(R.id.rootViewDishes);
+        adapter = (DishAdapter) listView.getAdapter();
+        if (adapter == null) {
+            adapter = new DishAdapter(DishesActivity.this, dishes);
+        } else {
+            adapter.add(dish);
+        }
+        listView.setAdapter(adapter);
     }
 }
