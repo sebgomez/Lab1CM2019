@@ -64,8 +64,9 @@ public class DishesActivity extends AppCompatActivity {
 
                 Dish newDish = createDish();
                 dishes.add(newDish);
-                showDishes(newDish);
                 saveDishes();
+                showDishes(newDish);
+
 
             }
         });
