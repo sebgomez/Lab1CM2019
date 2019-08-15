@@ -10,26 +10,35 @@
         style="@style/ListItemStyle"
         android:layout_height="wrap_content" />
 
+    <View style="@style/VerticalDivider" />
+
     <TextView
         android:id="@+id/type_text_view"
         style="@style/ListItemStyle"
         android:layout_height="wrap_content" />
+
+    <View style="@style/VerticalDivider" />
 
     <TextView
         android:id="@+id/time_text_view"
         style="@style/ListItemStyle"
         android:layout_height="wrap_content" />
 
+    <View style="@style/VerticalDivider" />
 
     <TextView
         android:id="@+id/prep_time_text_view"
         style="@style/ListItemStyle"
         android:layout_height="wrap_content" />
 
+    <View style="@style/VerticalDivider" />
+
     <TextView
         android:id="@+id/price_text_view"
         style="@style/ListItemStyle"
         android:layout_height="wrap_content" />
+
+    <View style="@style/VerticalDivider" />
 
     <TextView
         android:id="@+id/ingredients_text_view"

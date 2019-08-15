@@ -52,7 +52,9 @@ public class DishesActivity extends AppCompatActivity {
         /*for(int cont = 0; cont<=dishes.size(); cont++){
             showDishes(dishes.get(cont));
         }*/
-        showDishes(dishes.get(0));
+        if (dishes.size() > 0) {
+            showDishes(dishes.get(0));
+        }
         //showDishes(dishes.get(1));
 
         Button addDish = findViewById(R.id.add_dish);
@@ -69,22 +71,23 @@ public class DishesActivity extends AppCompatActivity {
         });
     }
 
-    private void saveDishes(){
+    private void saveDishes() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json =  gson.toJson(dishes);
+        String json = gson.toJson(dishes);
         editor.putString("list", json);
         editor.apply();
     }
 
-    private void loadData(){
+    private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("list", null);
-        Type type = new TypeToken<ArrayList<Dish>>() {}.getType();
-        dishes = gson.fromJson(json,type);
-        if(dishes == null){
+        Type type = new TypeToken<ArrayList<Dish>>() {
+        }.getType();
+        dishes = gson.fromJson(json, type);
+        if (dishes == null) {
             dishes = new ArrayList<>();
         }
     }
@@ -123,7 +126,7 @@ public class DishesActivity extends AppCompatActivity {
         return (new Dish(name, times, type, prep_time, price, ingredients));
     }
 
-    private void showDishes(Dish dish){
+    private void showDishes(Dish dish) {
         DishAdapter adapter;
         ListView listView = findViewById(R.id.rootViewDishes);
         adapter = (DishAdapter) listView.getAdapter();
