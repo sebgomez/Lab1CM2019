@@ -32,14 +32,15 @@ public class DishAdapter extends ArrayAdapter<Dish> {
         TextView timeTextView = listItemView.findViewById(R.id.time_text_view);
         ArrayList<String> servTime = currentDish.getTime();
 
-        for (int i = servTime.size(); i < 3; i++) {
-            servTime.add("");
+        if (servTime != null) {
+            for (int i = servTime.size(); i < 3; i++) {
+                servTime.add("");
+            }
+            timeTextView.setText(getContext().getString(R.string.time_message,
+                    servTime.get(0),
+                    servTime.get(1),
+                    servTime.get(2)));
         }
-        timeTextView.setText(getContext().getString(R.string.time_message,
-                servTime.get(0),
-                servTime.get(1),
-                servTime.get(2)));
-
         TextView prepTimeTextView = listItemView.findViewById(R.id.prep_time_text_view);
         prepTimeTextView.setText(getContext().getString(R.string.prep_time_message, currentDish.getPrepTime()));
 

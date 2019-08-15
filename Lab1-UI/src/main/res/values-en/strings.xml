@@ -20,4 +20,6 @@
     <string name="price_message">Price: $<xliff:g example="50000" id="price">%d</xliff:g></string>
     <string name="prep_time_message">Preparation time:   <xliff:g example="5" id="prepTime">%d</xliff:g> minutos</string>
     <string name="ingredients_message">Ingredients: <xliff:g example="paprika" id="ingredients">%s</xliff:g></string>
+    <string name="drink_name">Drink name</string>
+    <string name="add_drink">Add drink</string>
 </resources>

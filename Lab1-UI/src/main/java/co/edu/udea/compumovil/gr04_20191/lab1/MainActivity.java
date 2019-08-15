@@ -20,21 +20,12 @@ public class MainActivity extends AppCompatActivity {
         dishes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent DishesIntent = new Intent(MainActivity.this, DishesActivity.class);
-                startActivity(DishesIntent);
+                Intent dishesIntent = new Intent(MainActivity.this, DishesActivity.class);
+                startActivity(dishesIntent);
             }
         });
 
-        TextView test = findViewById(R.id.intent_text);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.vogella.com/"));
-                startActivity(intent);
-            }
-        });
-
-        /*TextView drinks = findViewById(R.id.drinks);
+        TextView drinks = findViewById(R.id.drinks);
         drinks.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the family category is clicked on.
             @Override
@@ -42,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent drinksIntent = new Intent(MainActivity.this, DrinksActivity.class);
                 startActivity(drinksIntent);
             }
-        });*/
+        });
 
 
     }
