@@ -18,6 +18,14 @@
             android:orientation="vertical"
             tools:context="co.edu.udea.compumovil.gr04_20191.lab1.DishesActivity">
 
+            <Button
+                android:id="@+id/drinkImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:onClick="close"
+                android:text="@string/img" />
+
 
             <EditText
                 android:id="@+id/drink_name_edit_text"

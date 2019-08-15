@@ -15,9 +15,15 @@
  */
 package co.edu.udea.compumovil.gr04_20191.lab1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,17 +33,23 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DishesActivity extends AppCompatActivity {
 
     ArrayList<Dish> dishes = new ArrayList<>();
+    public static final int PICK_IMAGE = 1;
+    Uri imageUri;
+    String imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +61,32 @@ public class DishesActivity extends AppCompatActivity {
         np.setMaxValue(60);
         np.setWrapSelectorWheel(true);
 
+
+
         loadData();
         /*for(int cont = 0; cont<=dishes.size(); cont++){
             showDishes(dishes.get(cont));
         }*/
         if (dishes.size() > 0) {
+
             showDishes(dishes.get(0));
+
         }
         //showDishes(dishes.get(1));
+
+        Button dishImg = findViewById(R.id.dishImg);
+        dishImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent gallery = new Intent();
+                gallery.setType("image/*");
+                gallery.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(gallery, "select picture"), PICK_IMAGE);
+
+            }
+        });
 
         Button addDish = findViewById(R.id.add_dish);
         addDish.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +94,9 @@ public class DishesActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Dish newDish = createDish();
+                System.out.println(imagen);
+                newDish.setImagen(imagen);
+                System.out.println(newDish.getImagen());
                 dishes.add(newDish);
                 saveDishes();
                 cleanFields();
@@ -72,6 +105,26 @@ public class DishesActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
+            imageUri = data.getData();
+            try {
+                Bitmap imagen2 = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imagen2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] b = baos.toByteArray();
+                imagen = Base64.encodeToString(b, Base64.DEFAULT);
+                Log.d("Image Log:", imagen);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
     private void saveDishes() {
@@ -103,6 +156,7 @@ public class DishesActivity extends AppCompatActivity {
         CheckBox checkBox1 = findViewById(R.id.morning_checkbox);
         CheckBox checkBox2 = findViewById(R.id.afternoon_checkbox);
         CheckBox checkBox3 = findViewById(R.id.night_checkbox);
+
         if (checkBox1.isChecked()) {
             times.add(getString(R.string.morning));
         }
@@ -129,10 +183,11 @@ public class DishesActivity extends AppCompatActivity {
         NumberPicker prepTimePicker = findViewById(R.id.prep_time_picker);
         int prep_time = prepTimePicker.getValue();
 
-        return (new Dish(name, times, type, prep_time, price, ingredients));
+        return (new Dish(imagen, name, times, type, prep_time, price, ingredients));
     }
 
     private void showDishes(Dish dish) {
+
         DishAdapter adapter;
         ListView listView = findViewById(R.id.rootViewDishes);
         adapter = (DishAdapter) listView.getAdapter();

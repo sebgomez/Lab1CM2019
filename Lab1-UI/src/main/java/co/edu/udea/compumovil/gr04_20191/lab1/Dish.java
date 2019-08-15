@@ -3,6 +3,7 @@ package co.edu.udea.compumovil.gr04_20191.lab1;
 import java.util.ArrayList;
 
 public class Dish {
+    private String imagen;
     private String name;
     private ArrayList<String> time;
     private String type;
@@ -10,7 +11,7 @@ public class Dish {
     private int price;
     private String ingredients;
 
-    public Dish(String name, ArrayList<String> time, String type, int prepTime, int price, String ingredients) {
+    public Dish(String imagen, String name, ArrayList<String> time, String type, int prepTime, int price, String ingredients) {
         this.name = name;
         this.time = time;
         this.type = type;
@@ -19,6 +20,9 @@ public class Dish {
         this.ingredients = ingredients;
     }
 
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     public void setTime(ArrayList<String> time) {
         this.time = time;
@@ -66,5 +70,9 @@ public class Dish {
 
     public String getIngredients() {
         return ingredients;
+    }
+
+    public String getImagen() {
+        return imagen;
     }
 }

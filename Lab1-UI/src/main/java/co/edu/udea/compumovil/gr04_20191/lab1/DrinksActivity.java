@@ -15,25 +15,37 @@
  */
 package co.edu.udea.compumovil.gr04_20191.lab1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DrinksActivity extends AppCompatActivity {
+    Uri imageUri;
+    String imagen;
 
     ArrayList<Drink> drinks = new ArrayList<>();
+    public static final int PICK_IMAGE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +61,53 @@ public class DrinksActivity extends AppCompatActivity {
         }
         //showDrinks(drinks.get(1));
 
+        Button drinkImg = findViewById(R.id.drinkImg);
+        drinkImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent gallery = new Intent();
+                gallery.setType("image/*");
+                gallery.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(gallery, "select picture"), PICK_IMAGE);
+
+            }
+        });
+
         Button addDrink = findViewById(R.id.add_drink);
         addDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Drink newDrink = createDrink();
+                newDrink.setImagen(imagen);
                 drinks.add(newDrink);
                 saveDrinks();
                 cleanFields();
                 showDrinks(newDrink);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
+            imageUri = data.getData();
+            try {
+                Bitmap imagen2 = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imagen2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] b = baos.toByteArray();
+                imagen = Base64.encodeToString(b, Base64.DEFAULT);
+                Log.d("Image Log:", imagen);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
     private void saveDrinks() {
@@ -96,7 +143,7 @@ public class DrinksActivity extends AppCompatActivity {
         EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
         String ingredients = ingredientsEdit.getText().toString();
 
-        return (new Drink(name, price, ingredients));
+        return (new Drink(imagen, name, price, ingredients));
     }
 
     private void showDrinks(Drink drink) {

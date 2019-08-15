@@ -1,10 +1,14 @@
 package co.edu.udea.compumovil.gr04_20191.lab1;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +26,15 @@ public class DishAdapter extends ArrayAdapter<Dish> {
                     R.layout.list_item, parent, false);
         }
         Dish currentDish = getItem(position);
+
+        String img = currentDish.getImagen();
+
+        byte[] decodedByte = Base64.decode(img, 0);
+        Bitmap dishImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+
+        ImageView imageView = listItemView.findViewById(R.id.image_imageView);
+        imageView.setImageBitmap(dishImg);
+
 
         TextView nameTextView = listItemView.findViewById(R.id.name_text_view);
         nameTextView.setText(currentDish.getName());
