@@ -19,7 +19,7 @@
     <string name="type_message">Tipo   \n<xliff:g example="Entrada" id="type">%s</xliff:g></string>
     <string name="prep_time_message">Tiempo de preparación:   <xliff:g example="5" id="prepTime">%d</xliff:g> minutos</string>
     <string name="price_message">Precio:  $<xliff:g example="50000" id="price">%d</xliff:g></string>
-    <string name="ingredients_message">Ingredients: <xliff:g example="paprika" id="ingredients">%s</xliff:g></string>
+    <string name="ingredients_message">Ingredientes: <xliff:g example="paprika" id="ingredients">%s</xliff:g></string>
     <string name="time_message">Horario:          <xliff:g id="morning">%s</xliff:g>          <xliff:g id="afternoon">%s</xliff:g>          <xliff:g id="night">%s</xliff:g></string>
     <string name="drink_name">Nombre de la bebida</string>
     <string name="add_drink">Agregar bebida</string>

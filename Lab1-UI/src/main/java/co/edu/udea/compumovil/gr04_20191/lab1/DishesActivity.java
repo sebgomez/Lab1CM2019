@@ -17,6 +17,7 @@ package co.edu.udea.compumovil.gr04_20191.lab1;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -114,10 +115,13 @@ public class DishesActivity extends AppCompatActivity {
 
         RadioGroup radioGroup = findViewById(R.id.type_group);
         RadioButton selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
-        String type = selectedRadioButton.getText().toString();
+        String type = "";
+        if (selectedRadioButton != null) type= selectedRadioButton.getText().toString();
 
         EditText priceEdit = findViewById(R.id.price_edit_text);
-        int price = Integer.parseInt(priceEdit.getText().toString());
+        String temp=priceEdit.getText().toString();
+        int price = 0;
+        if (!temp.equals("")) price = Integer.parseInt(temp);
 
         EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
         String ingredients = ingredientsEdit.getText().toString();

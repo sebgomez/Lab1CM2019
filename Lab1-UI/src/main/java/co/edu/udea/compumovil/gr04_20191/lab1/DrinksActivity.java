@@ -17,6 +17,7 @@ package co.edu.udea.compumovil.gr04_20191.lab1;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,7 +89,9 @@ public class DrinksActivity extends AppCompatActivity {
         String name = nameEdit.getText().toString();
 
         EditText priceEdit = findViewById(R.id.price_edit_text);
-        int price = Integer.parseInt(priceEdit.getText().toString());
+        String temp=priceEdit.getText().toString();
+        int price = 0;
+        if (!temp.equals("")) price = Integer.parseInt(temp);
 
         EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
         String ingredients = ingredientsEdit.getText().toString();

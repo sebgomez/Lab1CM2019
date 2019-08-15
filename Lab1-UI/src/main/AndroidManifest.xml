@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".DrinksActivity"
-            android:label="@string/category_dishes"
+            android:label="@string/category_drinks"
             android:parentActivityName=".MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
