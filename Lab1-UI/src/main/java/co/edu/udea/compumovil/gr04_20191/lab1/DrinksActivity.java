@@ -19,12 +19,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -61,7 +57,7 @@ public class DrinksActivity extends AppCompatActivity {
                 drinks.add(newDrink);
                 showDrinks(newDrink);
                 saveDrinks();
-
+                cleanFields();
             }
         });
     }
@@ -110,5 +106,26 @@ public class DrinksActivity extends AppCompatActivity {
             adapter.add(drink);
         }
         listView.setAdapter(adapter);
+    }
+
+    public void onClick(View view) {
+        cleanFields();
+    }
+
+    private void cleanFields() {
+        EditText nameEdit = findViewById(R.id.drink_name_edit_text);
+        nameEdit.setText("");
+
+        EditText priceEdit = findViewById(R.id.price_edit_text);
+        priceEdit.setText("");
+
+        EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
+        ingredientsEdit.setText("");
+    }
+
+    public void close(View view) {
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }

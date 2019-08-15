@@ -66,7 +66,7 @@ public class DishesActivity extends AppCompatActivity {
                 dishes.add(newDish);
                 showDishes(newDish);
                 saveDishes();
-
+                cleanFields();
             }
         });
     }
@@ -136,5 +136,40 @@ public class DishesActivity extends AppCompatActivity {
             adapter.add(dish);
         }
         listView.setAdapter(adapter);
+    }
+
+    public void onClick(View view) {
+        cleanFields();
+    }
+
+    private void cleanFields() {
+        EditText nameEdit = findViewById(R.id.dish_name_edit_text);
+        nameEdit.setText("");
+
+        CheckBox checkBox1 = findViewById(R.id.morning_checkbox);
+        CheckBox checkBox2 = findViewById(R.id.afternoon_checkbox);
+        CheckBox checkBox3 = findViewById(R.id.night_checkbox);
+        checkBox1.setChecked(false);
+        checkBox2.setChecked(false);
+        checkBox3.setChecked(false);
+
+        RadioGroup radioGroup = findViewById(R.id.type_group);
+        RadioButton selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+        if (selectedRadioButton != null) selectedRadioButton.setChecked(false);
+
+        EditText priceEdit = findViewById(R.id.price_edit_text);
+        priceEdit.setText("");
+
+        EditText ingredientsEdit = findViewById(R.id.ingredients_edit_text);
+        ingredientsEdit.setText("");
+
+        NumberPicker prepTimePicker = findViewById(R.id.prep_time_picker);
+        prepTimePicker.setValue(5);
+    }
+
+    public void close(View view) {
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }

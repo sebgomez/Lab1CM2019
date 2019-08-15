@@ -23,6 +23,8 @@
     <string name="time_message">Horario:          <xliff:g id="morning">%s</xliff:g>          <xliff:g id="afternoon">%s</xliff:g>          <xliff:g id="night">%s</xliff:g></string>
     <string name="drink_name">Nombre de la bebida</string>
     <string name="add_drink">Agregar bebida</string>
+    <string name="clean">limpiar</string>
+    <string name="close">Cerrar</string>
 
 
 </resources>
