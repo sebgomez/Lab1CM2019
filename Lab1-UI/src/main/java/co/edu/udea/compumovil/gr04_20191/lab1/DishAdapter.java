@@ -29,12 +29,12 @@ public class DishAdapter extends ArrayAdapter<Dish> {
 
         String img = currentDish.getImagen();
 
-        byte[] decodedByte = Base64.decode(img, 0);
-        Bitmap dishImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-
-        ImageView imageView = listItemView.findViewById(R.id.image_imageView);
-        imageView.setImageBitmap(dishImg);
-
+        if (img != null) {
+            byte[] decodedByte = Base64.decode(img, 0);
+            Bitmap dishImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+            ImageView imageView = listItemView.findViewById(R.id.image_imageView);
+            imageView.setImageBitmap(dishImg);
+        }
 
         TextView nameTextView = listItemView.findViewById(R.id.name_text_view);
         nameTextView.setText(currentDish.getName());

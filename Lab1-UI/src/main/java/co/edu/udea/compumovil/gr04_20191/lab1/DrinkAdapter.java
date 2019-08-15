@@ -29,13 +29,13 @@ public class DrinkAdapter extends ArrayAdapter<Drink> {
 
         String img = currentDrink.getImagen();
 
-        byte[] decodedByte = Base64.decode(img, 0);
-        Bitmap drinkImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+        if (img != null) {
+            byte[] decodedByte = Base64.decode(img, 0);
+            Bitmap drinkImg = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+            ImageView imageView = listItemView.findViewById(R.id.image_drink_imageView);
+            imageView.setImageBitmap(drinkImg);
+        }
 
-        System.out.println(currentDrink.getImagen());
-
-        ImageView imageView = listItemView.findViewById(R.id.image_drink_imageView);
-        imageView.setImageBitmap(drinkImg);
 
         TextView nameTextView = listItemView.findViewById(R.id.drink_name_text_view);
         nameTextView.setText(currentDrink.getName());
